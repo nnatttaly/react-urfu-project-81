@@ -2,21 +2,26 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![hexlet-check](https://github.com/nnatttaly/react-urfu-project-81/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/nnatttaly/react-urfu-project-81/actions)",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "homepage": "https://github.com/nnatttaly/react-urfu-project-81#readme",
+  "bugs": {
+    "url": "https://github.com/nnatttaly/react-urfu-project-81/issues"
   },
+  "license": "ISC",
+  "author": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nnatttaly/react-urfu-project-81.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nnatttaly/react-urfu-project-81/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "oxlint .",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check ."
   },
-  "homepage": "https://github.com/nnatttaly/react-urfu-project-81#readme",
   "devDependencies": {
+    "oxfmt": "0.79.0",
+    "oxlint": "1.94.0",
     "typescript": "7.0.2"
   }
 }
