@@ -1,0 +1,35 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v4
+
+      - name: Установить Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Установить зависимости
+        run: make install
+
+      - name: Проверить код
+        run: make lint
+
+      - name: Проверить форматирование
+        run: make format-check
+
+      - name: Проверить типы
+        run: make typecheck
+
+      - name: Проверить тесты
+        run: make test
+
+      - name: Проверить покрытие тестами
+        run: make test-coverage
