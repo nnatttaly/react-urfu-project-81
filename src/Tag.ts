@@ -14,14 +14,14 @@ const VOID_HTML_TAGS = new Set([
   "wbr",
 ]);
 
-export type TAttributes = {
+export type TagAttributes = {
   [key: string]: string | number;
 };
 
 export default class Tag {
   constructor(
     private readonly tag: string,
-    private readonly attributes: TAttributes = {},
+    private readonly attributes: TagAttributes = {},
     private readonly text: string = "",
   ) {}
 

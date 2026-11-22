@@ -12,7 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/nnatttaly/react-urfu-project-81.git"
   },
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
