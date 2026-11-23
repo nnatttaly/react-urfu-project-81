@@ -13,12 +13,18 @@ export default class FormBuilder {
   input(name: string, options: FieldOptions = {}) {
     const value = this.getTemplateValue(name);
     const { as = "input", ...attributes } = options;
+    const labelText = name.charAt(0).toUpperCase() + name.slice(1);
+    const label = new Tag("label", { for: name }, labelText);
     const tag =
       as === "textarea"
         ? new Tag("textarea", { cols: 20, rows: 40, name, ...attributes }, value)
         : new Tag("input", { name, type: "text", value, ...attributes });
 
-    this.fields.push(tag.toString());
+    this.fields.push(label.toString(), tag.toString());
+  }
+
+  submit(value: string = "Save") {
+    this.fields.push(new Tag("input", { type: "submit", value }).toString());
   }
 
   toString() {

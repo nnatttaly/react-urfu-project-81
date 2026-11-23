@@ -70,4 +70,22 @@ describe("HexletCode.formFor", () => {
       }),
     ).toThrow("Field 'age' does not exist in the template.");
   });
+
+  test.each([
+    [undefined, "form-with-submit.html"],
+    ["Wow", "form-with-custom-submit.html"],
+    ["", "form-with-empty-submit.html"],
+  ])("генерирует кнопку отправки с текстом %s", (text, fixture) => {
+    const form = HexletCode.formFor(template, { method: "post" }, (f) => {
+      f.input("name");
+      f.input("job", { as: "textarea" });
+      if (text === undefined) {
+        f.submit();
+      } else {
+        f.submit(text);
+      }
+    });
+
+    expect(form).toBe(readFixture(fixture));
+  });
 });

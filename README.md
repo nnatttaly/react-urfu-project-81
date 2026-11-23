@@ -15,11 +15,32 @@
 
 ## Установка
 
-<!-- Опишите установку: клонирование, зависимости, переменные окружения -->
+Понадобятся Node.js и npm.
+
+Склонируйте репозиторий и перейдите в папку проекта:
 
 ```bash
 git clone https://github.com/nnatttaly/react-urfu-project-81.git
 cd react-urfu-project-81
+```
+
+Установите зависимости:
+
+```bash
+npm install
+```
+
+Запустите тесты:
+
+```bash
+npm test
+```
+
+Проверьте код линтером и форматирование:
+
+```bash
+npm run lint
+npm run format:check
 ```
 
 ## Использование
