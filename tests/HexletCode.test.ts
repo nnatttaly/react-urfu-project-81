@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
+import PackagedHexletCode from "@hexlet/code";
 import HexletCode from "../src/index.js";
 
 const readFixture = (name: string) =>
@@ -7,6 +8,12 @@ const readFixture = (name: string) =>
 
 describe("HexletCode.formFor", () => {
   const template = { name: "rob", job: "hexlet", gender: "m" };
+
+  test("поддерживает импорт по имени пакета", () => {
+    const form = PackagedHexletCode.formFor(template, {}, () => {});
+
+    expect(form).toBe(readFixture("empty-form.html"));
+  });
 
   test("генерирует пустую форму с адресом по умолчанию", () => {
     const form = HexletCode.formFor(template, {}, () => {});
