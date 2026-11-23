@@ -1,18 +1,27 @@
-import Tag from "./Tag";
+import FormBuilder from "./FormBuilder.js";
+import Tag from "./Tag.js";
 
 export type FormTemplate = {
-  [field: string]: string | number;
+  [field: string]: string;
 };
 
 export type FormOptions = {
   url?: string;
+  method?: string;
 };
 
 export default class HexletCode {
-  static formFor(template: FormTemplate, options: FormOptions, f: () => void) {
-    return new Tag("form", {
-      action: options.url ?? "#",
-      method: "post",
-    }).toString();
+  static formFor(template: FormTemplate, options: FormOptions, callback: (f: FormBuilder) => void) {
+    const formBuilder = new FormBuilder(template);
+    callback(formBuilder);
+
+    return new Tag(
+      "form",
+      {
+        action: options.url ?? "#",
+        method: options.method ?? "post",
+      },
+      formBuilder.toString(),
+    ).toString();
   }
 }

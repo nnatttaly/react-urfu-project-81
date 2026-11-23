@@ -24,7 +24,31 @@ cd react-urfu-project-81
 
 ## Использование
 
-<!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
+```javascript
+import HexletCode from "@hexlet/code";
+
+const template = { name: "rob", job: "hexlet", gender: "m" };
+const form = HexletCode.formFor(template, { url: "/users", method: "post" }, (f) => {
+  f.input("name", { class: "user-input" });
+  f.input("job", { as: "textarea", rows: 50, cols: 50 });
+});
+
+console.log(form);
+```
+
+Результат (переносы строк добавлены для удобства чтения):
+
+```html
+<form action="/users" method="post">
+  <input name="name" type="text" value="rob" class="user-input" />
+  <textarea cols="50" rows="50" name="job">hexlet</textarea>
+</form>
+```
+
+По умолчанию форма отправляется на `#` методом `post`. Вызов `input()` создаёт
+текстовое поле, а опция `as: 'textarea'` — многострочное поле с размерами
+`cols="20"` и `rows="40"`. Дополнительные атрибуты можно передать вторым аргументом
+`input()`. Если поля нет в шаблоне, генератор выбрасывает ошибку.
 
 ---
 
