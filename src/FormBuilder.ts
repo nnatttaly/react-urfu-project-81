@@ -1,8 +1,11 @@
 import type { FormTemplate } from "./index.js";
 import Tag, { type TagAttributes } from "./Tag.js";
 
-export type FieldOptions = TagAttributes & {
+export type FieldOptions = {
+  [attribute: string]: string | number | TagAttributes | undefined;
   as?: "input" | "textarea";
+  label?: string;
+  labelHtml?: TagAttributes;
 };
 
 export default class FormBuilder {
@@ -12,13 +15,18 @@ export default class FormBuilder {
 
   input(name: string, options: FieldOptions = {}) {
     const value = this.getTemplateValue(name);
-    const { as = "input", ...attributes } = options;
-    const labelText = name.charAt(0).toUpperCase() + name.slice(1);
-    const label = new Tag("label", { for: name }, labelText);
+    const {
+      as = "input",
+      label: labelText = name.charAt(0).toUpperCase() + name.slice(1),
+      labelHtml = {},
+      ...attributes
+    } = options;
+    const label = new Tag("label", { for: name, ...labelHtml }, labelText);
+    const fieldAttributes = attributes as TagAttributes;
     const tag =
       as === "textarea"
-        ? new Tag("textarea", { cols: 20, rows: 40, name, ...attributes }, value)
-        : new Tag("input", { name, type: "text", value, ...attributes });
+        ? new Tag("textarea", { cols: 20, rows: 40, name, ...fieldAttributes }, value)
+        : new Tag("input", { name, type: "text", value, ...fieldAttributes });
 
     this.fields.push(label.toString(), tag.toString());
   }

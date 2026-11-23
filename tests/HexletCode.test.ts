@@ -68,6 +68,19 @@ describe("HexletCode.formFor", () => {
     expect(form).toBe(readFixture("empty-field-values.html"));
   });
 
+  test.each(["input", "textarea"] as const)("поддерживает текст и атрибуты лэйбла для %s", (as) => {
+    const form = HexletCode.formFor(template, {}, (f) => {
+      f.input("name", {
+        as,
+        label: "User",
+        labelHtml: { class: "form-label", id: "name-label" },
+      });
+      f.submit("Ok");
+    });
+
+    expect(form).toBe(readFixture(`custom-label-${as}.html`));
+  });
+
   test("выбрасывает ошибку, если поля нет в шаблоне", () => {
     expect(() =>
       HexletCode.formFor(template, { url: "/users" }, (f) => {
